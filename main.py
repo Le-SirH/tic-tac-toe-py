@@ -1,3 +1,5 @@
+import bot
+
 # Numbers from 0 to 8, tracking the positions of the board.
 # Each number will be replaced with an 'X' or 'O' eventually.
 board = [n for n in range(9)]
@@ -10,5 +12,10 @@ oMoves = []
 def move(player, pos):
     if player == 'X':
         xMoves.append(pos)
+    else:
+        oMoves.append(pos)
     board[pos] = player
     return print(board)
+
+# Initializes the AI
+bot = bot.Bot('X')
