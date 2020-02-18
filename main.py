@@ -7,7 +7,11 @@ board = [n for n in range(9)]
 # Tracks the past moves of each player, preventing them from making the same move
 xMoves = []
 oMoves = []
-choice=""
+choice = random.choice(["heads","tails"])
+players = ["X","O"]
+playerChoice = random.randint(1, 2)
+player = players[player]
+
 # Whenever a move is made, this modifies the board data & tracks past moves.
 def move(player, pos):
     if player == 'X':
@@ -18,16 +22,17 @@ def move(player, pos):
     return print(board)
 
 # Initializes the AI
-bot = bot.Bot('X')
+bot = bot.Bot()
+
 # Randomly picks heads or tails to see who takes the first move
-def coinFlip(choice):
-    choice=random.choice(["heads","tails"])
-x0=random.choice(["x","o"])
-print("Welcome to TicTacToe, you are",x0, + "'s. To see who goes first we will flip a coin.")
-coinFlip()
+
+
+print("Welcome to TicTacToe, you are", player, "'s. To see who goes first we will flip a coin.")
+
 userChoice=input("Heads or Tails")
-if userChoice==choice:
-    print("It was",choice, "You will go first, make your first move.")
-    
+
+if userChoice.lower() == choice:
+    print("It was", choice , "You will go first, make your first move.")
+
 else:
-    print("It was",choice,"I will go first. Good luck beating me >:| ")    
+    print("It was",choice,"I will go first. Good luck beating me >:| ")
