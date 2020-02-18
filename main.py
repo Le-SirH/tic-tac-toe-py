@@ -1,6 +1,13 @@
 import bot
 import random
 
+winningPos = [
+    [0, 1, 2], [3, 4, 5], 
+    [6, 7, 8], [0, 3, 6], 
+    [1, 4, 7], [2, 5, 8], 
+    [0, 4, 8], [2, 4, 6]
+]
+
 class Game:
 
     def __init__(self, player, bot, firstMove):
@@ -31,20 +38,29 @@ class Game:
             self.move(self.player, usrMove)
             self.checkWinner()
 
+    def stop(self):
+        print("GG")
+        exit()
+
     def move(self, player, pos):
         self.board[int(pos)] = player
-        return print(self.board)
+        return 
 
     def movesLeft(self):
         return len([pos for pos in self.board if type(pos) != str])
 
     def checkWinner(self):
-        pass
+        for pos in winningPos:
+            if board[pos[0]] == board[pos[1]] & board[pos[1]] == board[pos[2]]:
+                print("Winner Decided: {}".format(board[pos[0]]))
+                self.stop()
+                break
     
     def isTaken(self, movePos):
         pass
 
     def printBoard(self):
+        print(self.board)
         pass
 
 # Randomly picks heads or tails to see who takes the first move
