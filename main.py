@@ -57,7 +57,10 @@ class Game:
                 break
     
     def isTaken(self, movePos):
-        pass
+        openPos = [pos for pos in self.board if type(pos) != str]
+        if movePos in openPos:
+            return false
+        return true
 
     def printBoard(self):
         print(self.board)
