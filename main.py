@@ -51,7 +51,7 @@ class Game:
 
     def checkWinner(self):
         for pos in winningPos:
-            if board[pos[0]] == board[pos[1]] & board[pos[1]] == board[pos[2]]:
+            if self.board[pos[0]] == self.board[pos[1]] & self.board[pos[1]] == self.board[pos[2]]:
                 print("Winner Decided: {}".format(board[pos[0]]))
                 self.stop()
                 break
@@ -63,8 +63,12 @@ class Game:
         return true
 
     def printBoard(self):
-        print(self.board)
-        pass
+        print(self.board[0], "|", self.board[1], "|", self.board[2] )
+        print("____________________________________________________")
+        print(self.board[3], "|", self.board[4], "|", self.board[5] )
+        print("____________________________________________________")
+        print(self.board[6], "|", self.board[7], "|", self.board[8] )
+        
 
 # Randomly picks heads or tails to see who takes the first move
 choice = random.choice(["heads", "tails"])
