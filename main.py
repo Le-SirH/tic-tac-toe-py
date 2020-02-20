@@ -17,6 +17,8 @@ class Game:
         self.player = player
         self.firstMove = firstMove
         self.bot = bot
+        self.bot.board = self.board
+
 
     def start(self):
 
@@ -27,6 +29,7 @@ class Game:
         while self.movesLeft() > 0:
 
             self.move(self.bot.player, self.bot.chooseMove(self.board))
+            self.bot.board = self.board
             self.checkWinner()
             self.printBoard()
 
@@ -37,6 +40,10 @@ class Game:
 
             self.move(self.player, usrMove)
             self.checkWinner()
+
+        if self.movesLeft() == 0:
+            print("It's a draw!")
+            self.stop()
 
     def stop(self):
         print("GG")
@@ -52,6 +59,7 @@ class Game:
     def checkWinner(self):
         for pos in winningPos:
             if (self.board[pos[0]] == self.board[pos[1]]) & (self.board[pos[1]] == self.board[pos[2]]):
+                self.printBoard()
                 print("Winner Decided: {}".format(self.board[pos[0]]))
                 self.stop()
                 break
@@ -68,7 +76,6 @@ class Game:
         print(self.board[3], "|", self.board[4], "|", self.board[5] )
         print("---------")
         print(self.board[6], "|", self.board[7], "|", self.board[8] )
-        
 
 # Randomly picks heads or tails to see who takes the first move
 choice = random.choice(["heads", "tails"])
@@ -78,11 +85,11 @@ userChoice = input("Heads or Tails: ")
 print("It was {}.".format(choice))
 
 if userChoice.lower() == choice:
-    game = Game('X', bot.Bot('O'), 'X')
+    game = Game('X', bot.Bot('O', []), 'X')
     print("You will go first, make your first move.")
 
 else:
-    game = Game('O', bot.Bot('X'), 'X')
+    game = Game('O', bot.Bot('X', []), 'X')
     print("I will go first. Good luck beating me >:D")
 
 game.start()

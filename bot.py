@@ -9,16 +9,18 @@ winningPos = [
 
 class Bot:
 
-    def __init__(self, player):
+    def __init__(self, player, board):
         self.player = player
+        self.board = board
 
     def chooseMove(self, board):
         # Removes taken positions
-        positions = [pos for pos in board if type(pos) != str]
-
+        positions = [pos for pos in self.board if type(pos) != str]
         for pos in winningPos:
-            winningMovesLeft = [p for p in pos if type(p) != str]
-            if len(winningMovesLeft) == 1:
-                return winningMovesLeft[0]
+            pMoves = [pMove for pMove in pos if type(self.board[pMove]) == str]
+            if len(pMoves) == 2:
+                winningMovesLeft = [p for p in pos if type(self.board[p]) != str]
+                if (len(winningMovesLeft) == 1) & (self.board[pMoves[0]] == self.board[pMoves[1]]):
+                    return winningMovesLeft[0]
 
         return random.choice(positions)
