@@ -24,7 +24,8 @@ class Game:
 
         if self.player == self.firstMove:
             usrMove = input("Choose your first move: ")
-            self.move(self.player, usrMove)
+            self.move(self.
+            player, usrMove)
 
         while self.movesLeft() > 0:
 
@@ -41,10 +42,6 @@ class Game:
             self.move(self.player, usrMove)
             self.checkWinner()
 
-        if self.movesLeft() == 0:
-            print("It's a draw!")
-            self.stop()
-
     def stop(self):
         print("GG")
         exit()
@@ -57,6 +54,9 @@ class Game:
         return len([pos for pos in self.board if type(pos) != str])
 
     def checkWinner(self):
+        if self.movesLeft() == 0:
+            print("It's a draw!")
+            self.stop()
         for pos in winningPos:
             if (self.board[pos[0]] == self.board[pos[1]]) & (self.board[pos[1]] == self.board[pos[2]]):
                 self.printBoard()
@@ -93,3 +93,4 @@ else:
     print("I will go first. Good luck beating me >:D")
 
 game.start()
+game.printBoard()

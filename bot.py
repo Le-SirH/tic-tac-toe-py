@@ -12,15 +12,31 @@ class Bot:
     def __init__(self, player, board):
         self.player = player
         self.board = board
+        self.winPosGoal = random.choice(winningPos)
 
     def chooseMove(self, board):
-        # Removes taken positions
+
         positions = [pos for pos in self.board if type(pos) != str]
+        
         for pos in winningPos:
             pMoves = [pMove for pMove in pos if type(self.board[pMove]) == str]
             if len(pMoves) == 2:
                 winningMovesLeft = [p for p in pos if type(self.board[p]) != str]
                 if (len(winningMovesLeft) == 1) & (self.board[pMoves[0]] == self.board[pMoves[1]]):
                     return winningMovesLeft[0]
+        
+        winMove = random.choice(self.winPosGoal)
+        if self.isTaken(winMove) == False:
+            return winMove
 
-        return random.choice(positions)
+        else: 
+            self.winPosGoal = random.choice(winningPos)
+            return random.choice(positions)
+
+    def isTaken(self, movePos):
+
+        openPos = [pos for pos in self.board if type(pos) != str]
+        if movePos in openPos:
+            return False
+
+        return True
