@@ -2,9 +2,9 @@ import bot
 import random
 
 winningPos = [
-    [0, 1, 2], [3, 4, 5], 
-    [6, 7, 8], [0, 3, 6], 
-    [1, 4, 7], [2, 5, 8], 
+    [0, 1, 2], [3, 4, 5],
+    [6, 7, 8], [0, 3, 6],
+    [1, 4, 7], [2, 5, 8],
     [0, 4, 8], [2, 4, 6]
 ]
 
@@ -25,16 +25,16 @@ class Game:
             self.move(self.player, usrMove)
 
         while self.movesLeft() > 0:
-            
+
             self.move(self.bot.player, self.bot.chooseMove(self.board))
             self.checkWinner()
             self.printBoard()
-            
+
             usrMove = input("Choose a move: ")
-            while self.isTaken(usrMove):
+            while self.isTaken(usrMove) == False:
                 print("That move is taken!")
                 usrMove = input("Choose a move: ")
-            
+
             self.move(self.player, usrMove)
             self.checkWinner()
 
@@ -44,29 +44,29 @@ class Game:
 
     def move(self, player, pos):
         self.board[int(pos)] = player
-        return 
+        return
 
     def movesLeft(self):
         return len([pos for pos in self.board if type(pos) != str])
 
     def checkWinner(self):
         for pos in winningPos:
-            if self.board[pos[0]] == self.board[pos[1]] & self.board[pos[1]] == self.board[pos[2]]:
-                print("Winner Decided: {}".format(board[pos[0]]))
+            if (self.board[pos[0]] == self.board[pos[1]]) & (self.board[pos[1]] == self.board[pos[2]]):
+                print("Winner Decided: {}".format(self.board[pos[0]]))
                 self.stop()
                 break
-    
+
     def isTaken(self, movePos):
         openPos = [pos for pos in self.board if type(pos) != str]
         if movePos in openPos:
-            return false
-        return true
+            return False
+        return True
 
     def printBoard(self):
         print(self.board[0], "|", self.board[1], "|", self.board[2] )
-        print("____________________________________________________")
+        print("---------")
         print(self.board[3], "|", self.board[4], "|", self.board[5] )
-        print("____________________________________________________")
+        print("---------")
         print(self.board[6], "|", self.board[7], "|", self.board[8] )
         
 
@@ -78,13 +78,11 @@ userChoice = input("Heads or Tails: ")
 print("It was {}.".format(choice))
 
 if userChoice.lower() == choice:
-    bot = bot.Bot('O')
-    game = Game('X', bot, 'X')
+    game = Game('X', bot.Bot('O'), 'X')
     print("You will go first, make your first move.")
 
 else:
-    bot = bot.Bot('X')
-    game = Game('O', bot, bot.player)
+    game = Game('O', bot.Bot('X'), 'X')
     print("I will go first. Good luck beating me >:D")
 
 game.start()
