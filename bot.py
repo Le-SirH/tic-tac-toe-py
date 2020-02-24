@@ -14,7 +14,7 @@ class Bot:
         self.board = board
 
     def chooseMove(self, board):
-        # Removes taken positions
+        # Finds possible blocks
         positions = [pos for pos in self.board if type(pos) != str]
         for pos in winningPos:
             pMoves = [pMove for pMove in pos if type(self.board[pMove]) == str]
