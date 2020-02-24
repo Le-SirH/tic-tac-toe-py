@@ -1,4 +1,5 @@
 import random
+import time
 
 winningPos = [
     [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6],
@@ -13,6 +14,8 @@ class Bot:
         self.winPosGoal = random.choice(winningPos)
 
     def chooseMove(self, board):
+        print("Thinking...")
+        time.sleep(1)
         # filters the board positions to tell which are available
         positions = [pos for pos in self.board if type(pos) != str]
         for pos in winningPos:
