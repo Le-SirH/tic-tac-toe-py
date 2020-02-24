@@ -14,9 +14,13 @@ class Bot:
         self.winPosGoal = random.choice(winningPos)
 
     def chooseMove(self, board):
+<<<<<<< HEAD
+        # Finds possible blocks
+=======
         print("Thinking...")
         time.sleep(1)
         # filters the board positions to tell which are available
+>>>>>>> dcb56491e4d5abf56a36bd527f28684f20985299
         positions = [pos for pos in self.board if type(pos) != str]
         for pos in winningPos:
             # filters the moves available for each winning position
