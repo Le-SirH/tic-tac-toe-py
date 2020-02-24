@@ -1,4 +1,4 @@
-import bot 
+import bot
 import random
 
 winningPos = bot.winningPos
@@ -12,6 +12,7 @@ class Game:
         self.bot = bot
         self.bot.board = self.board
 
+    # Ryan Harrington
     def start(self):
 
         if self.player == self.firstMove:
@@ -29,11 +30,13 @@ class Game:
                 usrMove = input('Choose a move: ')
             self.move(self.player, usrMove)
 
+    # Ryan Waite & Ryan Harrington
     def stop(self):
         self.printBoard()
         print('GG')
         exit()
 
+    # Ryan Harrington
     def move(self, player, pos):
         self.board[int(pos)] = player
         self.checkWinner()
@@ -58,6 +61,7 @@ class Game:
             return False
         return True
 
+    # Ryan Waite
     def printBoard(self):
         print('\n')
         print(self.board[0], '|', self.board[1], '|', self.board[2])

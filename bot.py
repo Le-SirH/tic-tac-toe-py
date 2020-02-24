@@ -13,6 +13,7 @@ class Bot:
         self.board = []
         self.winPosGoal = random.choice(winningPos)
 
+    # Ryan Harrington
     def chooseMove(self, board):
         print("Thinking...")
         time.sleep(1)
@@ -27,13 +28,13 @@ class Bot:
             if (len(pMoves) == 2) & (len(winningMovesLeft) == 1):
                 if self.board[pMoves[0]] == self.board[pMoves[1]]:
                     return winningMovesLeft[0]
-        
+
         # If there are no blocks to be made, make a move based on a winning position.
         # winPosGoal is a randomly chosen winning position that the bot goes for.
         winMove = random.choice(self.winPosGoal)
         if self.isTaken(winMove) == False:
             return winMove
-        else: 
+        else:
             # resets winPosGoal & chooses a random position on the board.
             self.winPosGoal = random.choice(winningPos)
             return random.choice(positions)
