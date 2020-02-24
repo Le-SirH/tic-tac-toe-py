@@ -2,8 +2,14 @@ import bot
 import game
 import random
 import sys
-import pygame
+#import pygame
 # Ryan Waite
+
+def coordToNum(x,y):
+    result = x + (y ** 2) + 2 * (y % 2)
+    if y == 2: result += 2
+    return result
+
 print('\nWelcome to TicTacToe. To see who goes first we will flip a coin.\n')
 
 userChoice = input("Heads or Tails: ")
