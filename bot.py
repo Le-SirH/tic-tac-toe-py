@@ -15,8 +15,6 @@ class Bot:
 
     # Ryan Harrington
     def chooseMove(self, board):
-        print("Thinking...")
-        time.sleep(1)
         # filters the board positions to tell which are available
         positions = [pos for pos in self.board if type(pos) != str]
         for pos in winningPos:
