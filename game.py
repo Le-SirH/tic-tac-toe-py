@@ -18,6 +18,7 @@ class Game:
         self.board[int(pos)] = player
         if self.movesLeft() == 0:
             self.winner = "Tie!"
+            print('Its a Tie!')
             return
         self.checkWinner()
         return
@@ -28,6 +29,7 @@ class Game:
     def checkWinner(self):
         if self.movesLeft() == 0:
             self.winner = "Tie!"
+            print('Its a Tie!')
         for pos in winningPos:
             if (self.board[pos[0]] == self.board[pos[1]]) & (self.board[pos[1]] == self.board[pos[2]]):
                 self.winner = self.board[pos[0]]
