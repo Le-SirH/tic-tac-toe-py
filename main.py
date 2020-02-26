@@ -44,17 +44,22 @@ def checkWinner():
         return True
     else: return False
 
+def numToCoord(n):
+    x = GRID_WIDTH * (n % 3)
+    y = GRID_HEIGHT * (n // 3)
+    print(x, y)
+    return (x, y)
+
+def coordinate():
+    return ((MARGIN + GRID_WIDTH) * column + MARGIN,
+            (MARGIN + GRID_HEIGHT) * row + MARGIN)
+
 # Ryan Waite
 grid = []
 for row in range(10):
     grid.append([])
     for column in range(10):
         grid[row].append(0)
-
-
-def coordinate():
-    return ((MARGIN + GRID_WIDTH) * column + MARGIN, 
-            (MARGIN + GRID_HEIGHT) * row + MARGIN)
 
 # PyGame main loop
 while not gameOver:
@@ -82,7 +87,8 @@ while not gameOver:
             color = WHITE
             if game.board[coordToNum(column, row)] == 'X':
                 # color = BLUE
-                screen.blit(xImg, coordinate())
+                n = coordToNum(column, row)
+                screen.blit(xImg, numToCoord(n))
             if game.board[coordToNum(column, row)] == 'O':
                 # color = GREEN
                 screen.blit(oImg, coordinate())
