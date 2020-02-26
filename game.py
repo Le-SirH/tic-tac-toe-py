@@ -3,6 +3,7 @@ import random
 
 winningPos = bot.winningPos
 
+# Ryan Harrington
 class Game:
 
     def __init__(self, player, bot, firstMove):
@@ -13,7 +14,6 @@ class Game:
         self.bot.board = self.board
         self.winner = ""
 
-    # Ryan Harrington
     def move(self, player, pos):
         self.board[int(pos)] = player
         if self.movesLeft() == 0:
