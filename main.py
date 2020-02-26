@@ -4,7 +4,7 @@ import random
 import pygame
 
 # pygame setup
-
+# Ryan Waite
 pygame.init()
 clock = pygame.time.Clock()
 
@@ -28,7 +28,6 @@ pygame.display.set_caption("TicTacToe")
 
 gameOver = False
 
-# Ryan Waite
 game = game.Game('X', bot.Bot('O'), 'X')
 game.player = 'O'
 game.bot.player = 'X'
@@ -45,6 +44,7 @@ def checkWinner():
         return True
     else: return False
 
+# Ryan Waite
 grid = []
 for row in range(10):
     grid.append([])
@@ -59,6 +59,7 @@ def coordinate():
 # PyGame main loop
 while not gameOver:
 
+    # Ryan Harrington
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             gameOver = True
@@ -75,6 +76,7 @@ while not gameOver:
 
     screen.fill(BLACK)
 
+    # Ryan Waite
     for row in range(3):
         for column in range(3):
             color = WHITE
