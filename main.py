@@ -7,6 +7,7 @@ import pygame
 # pygame setup
 
 pygame.init()
+clock = pygame.time.Clock()
 
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -25,25 +26,27 @@ pygame.display.set_caption("TicTacToe")
 gameOver = False
 
 # Ryan Waite
-"""
-print('\nWelcome to TicTacToe. To see who goes first we will flip a coin.\n')
-
-userChoice = input("Heads or Tails: ")
-choice = random.choice(['heads', 'tails'])
-print('\nThe coin shows {}.'.format(choice))
-
-game = game.Game('X', bot.Bot('O'), 'X')
-
-if userChoice.lower() != choice:
-    game.player = 'O'
-    game.bot.player = 'X'
-    print('\nI will go first. Good luck beating me >:D\n')
-"""
-
 game = game.Game('X', bot.Bot('O'), 'X')
 game.player = 'O'
 game.bot.player = 'X'
 
+# Ryan Harrington
+def coordToNum(x, y):
+    result = (y ** 2) + (y * 2) + x
+    if y == 2: result -= 2
+    return result
+
+def checkWinner():
+    winners = ['X', 'O', 'Tie!']
+    if game.winner in winners:
+        return True
+    else: return False
+
+grid = []
+for row in range(10):
+    grid.append([])
+    for column in range(10):
+        grid[row].append(0)
 
 # PyGame main loop
 while not gameOver:
@@ -52,19 +55,24 @@ while not gameOver:
         if event.type == pygame.QUIT:
             gameOver = True
         elif event.type == pygame.MOUSEBUTTONDOWN:
+            if checkWinner() == True:
+                break
             pos = pygame.mouse.get_pos()
             column = pos[0] // (GRID_WIDTH + MARGIN)
             row = pos[1] // (GRID_HEIGHT + MARGIN)
-            grid[row][column] = game.player
+            game.move(game.player, coordToNum(column, row))
+            if checkWinner() == False:
+                game.move(game.bot.player, game.bot.chooseMove(game.board))
+            else: break
 
     screen.fill(BLACK)
 
     for row in range(3):
         for column in range(3):
             color = WHITE
-            if game.board[row][column] == 'X':
+            if game.board[coordToNum(column, row)] == 'X':
                 color = BLUE
-            if game.board[row][column] == 'O':
+            if game.board[coordToNum(column, row)] == 'O':
                 color = GREEN
             pygame.draw.rect(screen, color, [
                 (MARGIN + GRID_WIDTH) * column + MARGIN,
@@ -75,24 +83,4 @@ while not gameOver:
     clock.tick(60)
     pygame.display.flip()
 
-game.start()
 pygame.quit()
-
-
-"""
-
-0 1 2 3 4 5 6 7 8
-
-0,0 1,0 2,0
-0,1 1,1 2,1
-0,2 1,2 2,2
-
-0 1 2
-3 4 5
-6 7 8
-
-f(x,y) = (x+1) * (y+1) + (x - y)
-f(0,0) = 0
-f(1,1) = 4
-
-"""
