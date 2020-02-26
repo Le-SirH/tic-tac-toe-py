@@ -13,12 +13,12 @@ WHITE = (255, 255, 255)
 GREEN = (0, 200, 0)
 BLUE = (0, 0, 200)
 
-GRID_WIDTH = 195
-GRID_HEIGHT = 195
+GRID_WIDTH = 293.5
+GRID_HEIGHT = 293.5
 
 MARGIN = 5
 
-WINDOW_SIZE = [600, 600]
+WINDOW_SIZE = [900, 900]
 screen = pygame.display.set_mode(WINDOW_SIZE)
 pygame.display.set_caption("TicTacToe")
 
