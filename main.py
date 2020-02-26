@@ -1,7 +1,6 @@
 import bot
 import game
 import random
-import sys
 import pygame
 # Ryan Waite
 print('\nWelcome to TicTacToe. To see who goes first we will flip a coin.\n')
