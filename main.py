@@ -1,7 +1,6 @@
 import bot
 import game
 import random
-import sys
 import pygame
 
 # pygame setup
