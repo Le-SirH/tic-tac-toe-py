@@ -19,6 +19,10 @@ GRID_HEIGHT = 293.5
 MARGIN = 5
 
 WINDOW_SIZE = [900, 900]
+
+xImg = pygame.image.load('x.png')
+oImg = pygame.image.load('o.png')
+
 screen = pygame.display.set_mode(WINDOW_SIZE)
 pygame.display.set_caption("TicTacToe")
 
@@ -47,6 +51,11 @@ for row in range(10):
     for column in range(10):
         grid[row].append(0)
 
+
+def coordinate():
+    return ((MARGIN + GRID_WIDTH) * column + MARGIN, 
+            (MARGIN + GRID_HEIGHT) * row + MARGIN)
+
 # PyGame main loop
 while not gameOver:
 
@@ -70,10 +79,12 @@ while not gameOver:
         for column in range(3):
             color = WHITE
             if game.board[coordToNum(column, row)] == 'X':
-                color = BLUE
+                # color = BLUE
+                screen.blit(xImg, coordinate())
             if game.board[coordToNum(column, row)] == 'O':
-                color = GREEN
-            pygame.draw.rect(screen, color, [
+                # color = GREEN
+                screen.blit(oImg, coordinate())
+            else: pygame.draw.rect(screen, color, [
                 (MARGIN + GRID_WIDTH) * column + MARGIN,
                 (MARGIN + GRID_HEIGHT) * row + MARGIN,
                 GRID_WIDTH, GRID_HEIGHT
