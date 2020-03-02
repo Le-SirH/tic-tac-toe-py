@@ -3,7 +3,6 @@ import game
 import random
 import pygame
 
-# pygame setup
 # Ryan Waite
 pygame.init()
 clock = pygame.time.Clock()
@@ -38,12 +37,6 @@ def coordToNum(x, y):
     if y == 2: result -= 2
     return result
 
-def checkWinner():
-    winners = ['X', 'O', 'Tie!']
-    if game.winner in winners:
-        return True
-    else: return False
-
 def numToCoord(n):
     x = GRID_WIDTH * (n % 3) + (n - 1 * MARGIN)
     y = GRID_HEIGHT * (n // 3) + (n - 1 * MARGIN)
@@ -54,6 +47,12 @@ def coordinate():
             (MARGIN + GRID_HEIGHT) * row + MARGIN)
     return coord
 
+def checkWinner():
+    winners = ['X', 'O', 'Tie!']
+    if game.winner in winners:
+        return True
+    else: return False
+
 # Ryan Waite
 grid = []
 for row in range(10):
@@ -63,7 +62,6 @@ for row in range(10):
 
 # PyGame main loop
 while not gameOver:
-
     # Ryan Harrington
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -84,7 +82,6 @@ while not gameOver:
                 else: break
 
     screen.fill(BLACK)
-
     # Ryan Waite
     for row in range(3):
         for column in range(3):
@@ -101,7 +98,6 @@ while not gameOver:
                 (MARGIN + GRID_HEIGHT) * row + MARGIN,
                 GRID_WIDTH, GRID_HEIGHT
             ])
-
     clock.tick(60)
     pygame.display.flip()
 
