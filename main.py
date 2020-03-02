@@ -45,14 +45,14 @@ def checkWinner():
     else: return False
 
 def numToCoord(n):
-    x = GRID_WIDTH * (n % 3)
-    y = GRID_HEIGHT * (n // 3)
-    print(x, y)
+    x = GRID_WIDTH * (n % 3) + (n - 1 * MARGIN)
+    y = GRID_HEIGHT * (n // 3) + (n - 1 * MARGIN)
     return (x, y)
 
 def coordinate():
-    return ((MARGIN + GRID_WIDTH) * column + MARGIN,
+    coord = ((MARGIN + GRID_WIDTH) * column + MARGIN,
             (MARGIN + GRID_HEIGHT) * row + MARGIN)
+    return coord
 
 # Ryan Waite
 grid = []
@@ -69,15 +69,19 @@ while not gameOver:
         if event.type == pygame.QUIT:
             gameOver = True
         elif event.type == pygame.MOUSEBUTTONDOWN:
-            if checkWinner() == True:
-                break
             pos = pygame.mouse.get_pos()
             column = pos[0] // (GRID_WIDTH + MARGIN)
             row = pos[1] // (GRID_HEIGHT + MARGIN)
-            game.move(game.player, coordToNum(column, row))
-            if checkWinner() == False:
-                game.move(game.bot.player, game.bot.chooseMove(game.board))
-            else: break
+            playerMove = coordToNum(column, row)
+            if game.isTaken(playerMove):
+                break
+            elif checkWinner() == True:
+                break
+            else:
+                game.move(game.player, playerMove)
+                if checkWinner() == False:
+                    game.move(game.bot.player, game.bot.chooseMove(game.board))
+                else: break
 
     screen.fill(BLACK)
 
@@ -86,12 +90,12 @@ while not gameOver:
         for column in range(3):
             color = WHITE
             if game.board[coordToNum(column, row)] == 'X':
-                # color = BLUE
                 n = coordToNum(column, row)
-                screen.blit(xImg, numToCoord(n))
-            if game.board[coordToNum(column, row)] == 'O':
-                # color = GREEN
-                screen.blit(oImg, coordinate())
+                coord = numToCoord(n)
+                screen.blit(xImg, coord)
+            elif game.board[coordToNum(column, row)] == 'O':
+                coord = coordinate()
+                screen.blit(oImg, coord)
             else: pygame.draw.rect(screen, color, [
                 (MARGIN + GRID_WIDTH) * column + MARGIN,
                 (MARGIN + GRID_HEIGHT) * row + MARGIN,
