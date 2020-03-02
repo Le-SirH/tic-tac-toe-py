@@ -12,12 +12,10 @@ WHITE = (255, 255, 255)
 GREEN = (0, 200, 0)
 BLUE = (0, 0, 200)
 
+WINDOW_SIZE = [900, 900]
 GRID_WIDTH = 293.5
 GRID_HEIGHT = 293.5
-
 MARGIN = 5
-
-WINDOW_SIZE = [900, 900]
 
 xImg = pygame.image.load('x.png')
 oImg = pygame.image.load('o.png')
@@ -26,7 +24,6 @@ screen = pygame.display.set_mode(WINDOW_SIZE)
 pygame.display.set_caption("TicTacToe")
 
 gameOver = False
-
 game = game.Game('X', bot.Bot('O'), 'X')
 game.player = 'O'
 game.bot.player = 'X'
@@ -43,13 +40,11 @@ def numToCoord(n):
     return (x, y)
 
 def coordinate():
-    coord = ((MARGIN + GRID_WIDTH) * column + MARGIN,
+    return ((MARGIN + GRID_WIDTH) * column + MARGIN,
             (MARGIN + GRID_HEIGHT) * row + MARGIN)
-    return coord
 
 def checkWinner():
-    winners = ['X', 'O', 'Tie!']
-    if game.winner in winners:
+    if game.winner in ['X', 'O', 'Tie!']:
         return True
     else: return False
 
@@ -62,6 +57,9 @@ for row in range(10):
 
 # PyGame main loop
 while not gameOver:
+
+    screen.fill(BLACK)
+
     # Ryan Harrington
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -71,33 +69,27 @@ while not gameOver:
             column = pos[0] // (GRID_WIDTH + MARGIN)
             row = pos[1] // (GRID_HEIGHT + MARGIN)
             playerMove = coordToNum(column, row)
-            if game.isTaken(playerMove):
-                break
-            elif checkWinner() == True:
-                break
-            else:
+            if checkWinner() == True: break
+            elif not game.isTaken(playerMove):
                 game.move(game.player, playerMove)
-                if checkWinner() == False:
+                if not checkWinner():
                     game.move(game.bot.player, game.bot.chooseMove(game.board))
-                else: break
 
-    screen.fill(BLACK)
     # Ryan Waite
     for row in range(3):
         for column in range(3):
             color = WHITE
             if game.board[coordToNum(column, row)] == 'X':
                 n = coordToNum(column, row)
-                coord = numToCoord(n)
-                screen.blit(xImg, coord)
+                screen.blit(xImg, numToCoord(n))
             elif game.board[coordToNum(column, row)] == 'O':
-                coord = coordinate()
-                screen.blit(oImg, coord)
+                screen.blit(oImg, coordinate())
             else: pygame.draw.rect(screen, color, [
                 (MARGIN + GRID_WIDTH) * column + MARGIN,
                 (MARGIN + GRID_HEIGHT) * row + MARGIN,
                 GRID_WIDTH, GRID_HEIGHT
             ])
+
     clock.tick(60)
     pygame.display.flip()
 
