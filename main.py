@@ -35,8 +35,8 @@ def coordToNum(x, y):
     return result
 
 def numToCoord(n):
-    x = GRID_WIDTH * (n % 3) + (n - 1 * MARGIN)
-    y = GRID_HEIGHT * (n // 3) + (n - 1 * MARGIN)
+    x = GRID_WIDTH * (n % 3) + (n % 3 * MARGIN) + MARGIN
+    y = GRID_HEIGHT * (n // 3) + (n // 3 * MARGIN) + MARGIN
     return (x, y)
 
 def coordinate():
