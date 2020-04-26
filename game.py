@@ -3,7 +3,6 @@ import random
 
 winningPos = bot.winningPos
 
-# Ryan Harrington
 class Game:
 
     def __init__(self, player, bot, firstMove):

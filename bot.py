@@ -13,7 +13,6 @@ class Bot:
         self.board = []
         self.winPosGoal = random.choice(winningPos)
 
-    # Ryan Harrington
     def chooseMove(self, board):
         # determines whether there is a spot to be blocked
         # pMoves finds available moves for each winning position

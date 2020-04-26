@@ -3,7 +3,6 @@ import game
 import random
 import pygame
 
-# Ryan Waite
 pygame.init()
 clock = pygame.time.Clock()
 
@@ -28,7 +27,6 @@ game = game.Game('X', bot.Bot('O'), 'X')
 game.player = 'O'
 game.bot.player = 'X'
 
-# Ryan Harrington
 def coordToNum(x, y):
     result = (y ** 2) + (y * 2) + x
     if y == 2: result -= 2
@@ -48,7 +46,6 @@ def checkWinner():
         return True
     else: return False
 
-# Ryan Waite
 grid = []
 for row in range(10):
     grid.append([])
@@ -60,7 +57,6 @@ while not gameOver:
 
     screen.fill(BLACK)
 
-    # Ryan Harrington
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             gameOver = True
@@ -75,7 +71,6 @@ while not gameOver:
                 if not checkWinner():
                     game.move(game.bot.player, game.bot.chooseMove(game.board))
 
-    # Ryan Waite
     for row in range(3):
         for column in range(3):
             color = WHITE
